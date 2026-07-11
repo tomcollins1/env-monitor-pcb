@@ -1,0 +1,5 @@
+## Power Budget
+
+This document details and covers all estimated power values concerning the PCB, including a calculated battery life.
+
+A power budget is essentially a calculation on how much current your system draws on average, which is then divided into battery capacity to calculate runtime. Most components are not on continuously, as they have an active current when they are working and an sleep/idle current when waiting. A weighted average based on how long each state lasts is then calculated.
