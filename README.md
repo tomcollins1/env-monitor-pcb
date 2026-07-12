@@ -37,7 +37,7 @@ A portable environmental monitor built on a custom PCB, measuring CO₂, tempera
  - Battery charger: MCP73831 - £0.70
  - USB-C connector: Female USB-C - £1
  - CO2, humidity and temperature sensor: SCD41 - £9
- - Pressure sensor: BMP388 - £2
+ - Pressure sensor: BMP390 - £2
  - Display: Waveshare 2.13" e-ink display - £5
  - Resistors, capacitors, buttons etc (small components): Estimated below £4
  - Manufacturing: JLCPCB - ~£3-5
