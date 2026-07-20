@@ -19,20 +19,39 @@ A portable environmental monitor built on a custom PCB, measuring CO₂, tempera
 ## How does it work?:
  - An ESP32 will act as a central microcontroller with all the sensors connected to 2 GPIO's per component, using I2C communication for clock and data. The ESP32 will then process the data and display values for the user on the E-ink display, which will update every 5 minutes via WiFi. A LiPo battery will keep the device powered, with a long battery life, it will be able to be charged via USB-C, using two 5.1kΩ resistors to negotiate 5V from the charger.
 
-## Block diagram:
-USB-C Male header → USB-C Female header → MCP73831
-                                             ↓
-                                    Adafruit 2000mAh LiPo
-                                             ↓
-                                          AP2112K
-                                   ↓      ↓      ↓      ↓
-                                BMP390  SCD41  ESP32  E-Ink
-                                   ↓      ↓      ↓
-                                       I2C Bus
-                                          ↓
-                                       SPI Bus
-                                          ↓
-                                        E-Ink
+## Block Diagram
+
+USB-C Male Header
+        │
+        ▼
+USB-C Female Header
+        │
+        ▼
+MCP73831 (LiPo Charger)
+        │
+        ▼
+Adafruit 2000mAh LiPo Battery
+        │
+        ▼
+AP2112K (3.3V Regulator)
+        │
+        ├───────────────┬───────────────┬───────────────┐
+        ▼               ▼               ▼               ▼
+    BMP390           SCD41            ESP32          E-Ink Display
+        │               │               │
+        └───────┬───────┴───────┬───────┘
+                ▼
+             I2C Bus
+                │
+                ├──────────────► BMP390
+                ├──────────────► SCD41
+                └──────────────► ESP32
+                │
+                ▼
+             SPI Bus
+                │
+                ▼
+          E-Ink Display
                                    
 ## Target specifications and features:
  - Communication type between components and microcontroller: I2C
