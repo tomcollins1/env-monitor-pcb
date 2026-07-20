@@ -21,6 +21,9 @@ A portable environmental monitor built on a custom PCB, measuring CO₂, tempera
 
 ## Block Diagram
 
+## Block Diagram
+
+```text
 USB-C Male Header
         │
         ▼
@@ -52,6 +55,7 @@ AP2112K (3.3V Regulator)
                 │
                 ▼
           E-Ink Display
+```
                                    
 ## Target specifications and features:
  - Communication type between components and microcontroller: I2C
