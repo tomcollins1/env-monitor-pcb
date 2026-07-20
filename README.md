@@ -20,8 +20,20 @@ A portable environmental monitor built on a custom PCB, measuring CO₂, tempera
  - An ESP32 will act as a central microcontroller with all the sensors connected to 2 GPIO's per component, using I2C communication for clock and data. The ESP32 will then process the data and display values for the user on the E-ink display, which will update every 5 minutes via WiFi. A LiPo battery will keep the device powered, with a long battery life, it will be able to be charged via USB-C, using two 5.1kΩ resistors to negotiate 5V from the charger.
 
 ## Block diagram:
- - In progress...
-
+USB-C Male header → USB-C Female header → MCP73831
+                                             ↓
+                                    Adafruit 2000mAh LiPo
+                                             ↓
+                                          AP2112K
+                                   ↓      ↓      ↓      ↓
+                                BMP390  SCD41  ESP32  E-Ink
+                                   ↓      ↓      ↓
+                                       I2C Bus
+                                          ↓
+                                       SPI Bus
+                                          ↓
+                                        E-Ink
+                                   
 ## Target specifications and features:
  - Communication type between components and microcontroller: I2C
  - PPM CO2 Measurements: 400-5000 ppm
