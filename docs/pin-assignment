@@ -1,0 +1,35 @@
+# GPIO Pin Assignment
+
+## I2C Bus (Shared — SCD41 and BMP390)
+
+| Signal | GPIO Pin | Direction | Connected To |
+|---|---|---|---|
+| I2C SDA | GPIO 21 | Bidirectional | SCD41 pin 2, BMP390 SDI pin |
+| I2C SCL | GPIO 22 | Output | SCD41 pin 3, BMP390 SCK pin |
+
+Both sensors share these two GPIO pins. They are distinguished
+by their I2C addresses:
+- SCD41: 0x62 (SEL pin tied to GND)
+- BMP390: 0x76 (SDO pin tied to GND)
+
+## SPI Bus (E-ink Display Only)
+
+| Signal | GPIO Pin | Direction | Connected To |
+|---|---|---|---|
+| MOSI | GPIO 23 | Output | E-ink DIN pin |
+| SCK | GPIO 18 | Output | E-ink CLK pin |
+| EINK_CS | GPIO 5 | Output | E-ink CS pin |
+| EINK_DC | GPIO 17 | Output | E-ink DC pin |
+| EINK_RST | GPIO 16 | Output | E-ink RST pin |
+| EINK_BUSY | GPIO 4 | Input | E-ink BUSY pin |
+
+## Control and Debug
+
+| Signal | GPIO Pin | Direction | Notes |
+|---|---|---|---|
+| BOOT button | GPIO 0 | Input | 10kΩ pull-up to 3.3V, low = enter bootloader |
+| RESET button | EN pin | Input | Direct to EN pin, not a GPIO |
+| Status LED | GPIO 2 | Output | 330Ω series resistor to GND |
+| UART TX | GPIO 1 | Output | Programming/debug header |
+| UART RX | GPIO 3 | Input | Programming/debug header |
+| Battery ADC | GPIO 35 | Input | Input-only pin, 100kΩ voltage divider from VBAT |
