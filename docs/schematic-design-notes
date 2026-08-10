@@ -1,1 +1,23 @@
+## Schematic design notes
 
+## Sensors
+
+## I2C Bus — Shared Between SCD41 and BMP390
+
+Both sensors share GPIO21 (SDA) and GPIO22 (SCL). They are 
+distinguished by unique I2C addresses:
+- SCD41: 0x62 — set by SEL pin tied to GND
+- BMP390: 0x76 — set by SDO pin tied to GND
+
+No I2C address conflict exists between these two sensors.
+4.7kΩ pull-up resistors on SDA and SCL are placed once and 
+shared by both sensors. Pull-ups are located near the ESP32 
+end of the bus.
+
+## BMP390 CSB Pin — Interface Selection
+
+CSB is tied to +3V3 to select I2C mode. This is mandatory —
+if CSB is left floating or pulled low, the BMP390 enters SPI 
+mode and will not respond to I2C transactions. This pin must 
+be verified on the schematic and confirmed during bring-up 
+with an I2C scanner before any sensor-specific firmware is run.
