@@ -21,3 +21,29 @@ if CSB is left floating or pulled low, the BMP390 enters SPI
 mode and will not respond to I2C transactions. This pin must 
 be verified on the schematic and confirmed during bring-up 
 with an I2C scanner before any sensor-specific firmware is run.
+
+## MCP73831 Battery Charger design choices
+
+**PROG resistor (R3 = 2kΩ):**
+Charge current formula: I_CHARGE = 1000V / R_PROG
+For 500mA: R_PROG = 1000 / 0.5 = 2kΩ
+500mA is a 0.25C rate for the 2000mAh battery — safe and 
+within MCP73831's 500mA maximum output current.
+Estimated charge time from empty: 2000mAh / 500mA = ~4 hours.
+
+**STAT pin LED (D1, R4 = 1kΩ):**
+Open-drain output. Pulls LOW during charging, floats when 
+complete. 1kΩ resistor limits LED current to:
+I = (3.3V - 2.0V) / 1000Ω = 1.3mA — dim but clearly visible.
+
+**Decoupling capacitors:**
+C2 (4.7µF) on VDD — input supply filtering.
+C3 (4.7µF) on VBAT — output stability.
+Both must be placed as close as possible to their respective 
+pins during PCB layout.
+
+**VBAT net:**
+VBAT feeds both the JST-PH battery connector (J2) and the 
+AP2112K LDO input. When USB is connected, MCP73831 charges 
+the battery via this net. When USB is disconnected, the 
+battery discharges through this net into the LDO.
